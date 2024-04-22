@@ -71,7 +71,6 @@ def handle(length=50, width=5) -> OpenSCADObject:
         linear_extrude(width),
     )
 
-
 def corner(height: int = 1):
     """
     Create a corner that allows to connect two parts via M3 screws.

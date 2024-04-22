@@ -73,3 +73,31 @@ def r19o(factor: float = 1) -> float:
     full rack giving it its name.
     """
     return 482.6 * factor
+
+
+def inches(factor: float = 1) -> float:
+    """
+    A function to convert inches into millimeters.
+    """
+    return 24.5 * factor
+
+
+def l19x(factor: float = 1) -> float:
+    """
+    The size of a Libre19 brick along the x-axis.
+    """
+    return factor * 73
+
+
+def l19y(factor: float = 1) -> float:
+    """
+    The size of a Libre19 brick along the y-axis.
+    """
+    return factor * 215
+
+
+def l19z(factor: float = 1) -> float:
+    """
+    The size of a Libre19 brick along the z-axis.
+    """
+    return factor * 42.5
