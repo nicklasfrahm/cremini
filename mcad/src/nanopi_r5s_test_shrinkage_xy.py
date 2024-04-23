@@ -1,5 +1,5 @@
 """
-An test file to calibrate 3D-printing shrinkage.
+A test file to calibrate 3D-printing shrinkage.
 """
 from solid import OpenSCADObject, cube
 from solid.objects import translate, color
