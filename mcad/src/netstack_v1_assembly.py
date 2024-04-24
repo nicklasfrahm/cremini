@@ -6,10 +6,10 @@ from solid.objects import translate
 from lib.utils import build, combine
 from lib.units import rxxu, rxxr, r19o
 
-import netstack_v1_nanopir5s
+from netstack_v1_case_nanopir5s import obj as nanopir5s_case
 
 solid = combine(
-    netstack_v1_nanopir5s.obj(),
+    nanopir5s_case(),
     translate([0, 0, 0]),
 )
 

@@ -1,5 +1,5 @@
 """
-An test file to calibrate 3D-printing shrinkage.
+A model of the Nanopi R5S with its enclosure.
 """
 from solid import OpenSCADObject, polygon
 from solid.objects import color
