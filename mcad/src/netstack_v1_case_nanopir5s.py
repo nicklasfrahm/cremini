@@ -14,11 +14,11 @@ tol_z = 0.1
 tol_xy = 0.25
 unit_count = 4
 margin_screw = 10
-margin_case = 6
-margin_cover = 3
+margin_base = 3
+margin_case = margin_base * 1
 
 # Create the outline of the case.
-case_x = (floor(r19i(1)) - unit_count * margin_case) / 3
+case_x = (floor(r19i(1)) - unit_count * margin_base) / 3
 case_y = r5s_y + 2 * margin_case
 case_z = rxxu(1) - 0.95
 solid = cube([case_x, case_y, case_z])
@@ -45,11 +45,11 @@ solid -= slot
 
 # Create access holes for the Nanopi R5S.
 front_x = pocket_x
-front_y = case_y + 2 * margin_cover
-front_z = r5s_z - 2 * margin_cover
+front_y = case_y + 2 * margin_base
+front_z = r5s_z - 2 * margin_base
 front = combine(
     cube([front_x, front_y, front_z]),
-    translate([(case_x - front_x) / 2, -margin_cover, margin_cover + margin_case]),
+    translate([(case_x - front_x) / 2, -margin_base, margin_base + margin_case]),
 )
 solid -= front
 

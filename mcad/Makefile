@@ -23,4 +23,4 @@ build/stl/%.stl: build/scad/%.scad
 # Generate PNG file.
 build/png/%.png: build/scad/%.scad
 	@mkdir -p $(@D)
-	openscad -o $@ --imgsize 1024,1024 $^
+	openscad -o $@ --imgsize 2048,2048 $^

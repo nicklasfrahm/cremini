@@ -1,5 +1,15 @@
 # Network stack 📡
 
+# Version 1
+
+This new iteration focuses on simplicity in terms of components and assembly. The goal is to provide a basic network stack that can be easily assembled and maintained. The following components are planned:
+
+- 3x [NanoPi R5S][nanopi-r5s] as network routers and firewalls
+
+![Network stack v1](./netstack_v1_assembly.png)
+
+# Version 0
+
 One part of the project is a network stack, which provides a top of rack L3 router, network switches and power. Below, you may find a list of all final components and a picture of the current state.
 
 - [x] Rack mount chassis
@@ -30,3 +40,4 @@ One part of the project is a network stack, which provides a top of rack L3 rout
 [wikipedia-veroboard]: https://en.wikipedia.org/wiki/Veroboard
 [wiki-nftables]: https://wiki.nftables.org/wiki-nftables/index.php/What_is_nftables%3F
 [seeed-cm4router]: https://www.seeedstudio.com/Rapberry-Pi-CM4-Dual-GbE-Carrier-Board-p-4874.html
+[nanopi-r5s]: https://www.friendlyelec.com/index.php?route=product/product&product_id=287
