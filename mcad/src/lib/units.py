@@ -79,7 +79,7 @@ def inches(factor: float = 1) -> float:
     """
     A function to convert inches into millimeters.
     """
-    return 24.5 * factor
+    return 25.4 * factor
 
 
 def l19x(factor: float = 1) -> float:

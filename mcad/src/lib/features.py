@@ -8,7 +8,7 @@ from solid import OpenSCADObject
 from solid.objects import polygon, cube, cylinder
 from solid.utils import linear_extrude, rotate, translate, up, forward, right
 from .utils import combine
-from .units import rxxu
+from .units import rxxu, inches
 
 
 def deg2rad(deg: float):
@@ -83,12 +83,13 @@ def corner(height: int = 1):
     msd = 10
 
     # Create corner.
+    c_tol = 0.1
     c_x = mbo * 2
     c_y = mbo * 2
-    c_z = rxxu(height)
+    c_z = rxxu(height) + 2 * c_tol
     solid = combine(
-        cube([c_x, c_y, c_z + 2], center=True),
-        up(c_z / 2),
+        cube([c_x, c_y, c_z], center=True),
+        up(c_z / 2 - c_tol),
     )
     mso = -(c_y / 2 + msd)
     screw = combine(
@@ -98,12 +99,12 @@ def corner(height: int = 1):
     for i in range(2):
         solid += combine(
             screw,
-            translate([5, mso, 5 + i * c_z - i * 10]),
+            translate([mbo / 2, mso, inches(0.25) + i * inches(1.25)]),
         )
     for i in range(2):
         solid += combine(
             screw,
-            translate([-5, mso, 5 + i * c_z - i * 10]),
+            translate([-mbo / 2, mso, inches(0.25) + i * inches(1.25)]),
         )
 
     return solid

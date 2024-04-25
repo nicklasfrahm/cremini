@@ -3,10 +3,11 @@ An test file to calibrate 3D-printing shrinkage.
 """
 from math import floor
 from solid import OpenSCADObject
-from solid.objects import translate, cube, scale, color
+from solid.objects import translate, cube, scale, color, cylinder
+from solid.utils import up, rotate
 from lib.utils import build, combine
-from lib.units import rxxu, r19i
-from lib.features import corners
+from lib.units import rxxu, r19i, inches
+from lib.features import corners, corner
 
 from netstack_v1_nanopir5s import r5s_x, r5s_y, r5s_z
 
@@ -20,12 +21,12 @@ margin_case = margin_base * 1
 # Create the outline of the case.
 case_x = (floor(r19i(1)) - unit_count * margin_base) / 3
 case_y = r5s_y + 2 * margin_case
-case_z = rxxu(1) - 0.95
+case_z = rxxu(1) - 2 * tol_xy
 solid = cube([case_x, case_y, case_z])
 
 # Create the pocket for the Nanopi R5S.
 pocket_x = r5s_x + 2 * tol_xy
-pocket_y = r5s_y + tol_z
+pocket_y = r5s_y + 2 * tol_z
 pocket = combine(
     cube([pocket_x, pocket_y, case_z]),
     scale([1, 1, case_z/r5s_z]),
@@ -44,7 +45,7 @@ slot = combine(
 solid -= slot
 
 # Create access holes for the Nanopi R5S.
-front_x = pocket_x
+front_x = pocket_x - 2 * margin_base
 front_y = case_y + 2 * margin_base
 front_z = r5s_z - 2 * margin_base
 front = combine(
@@ -61,6 +62,7 @@ solid -= corners(
 
 solid = combine(
     solid,
+    translate([0, 0, (rxxu(1) - case_z) / 2]),
     color("#666"),
 )
 
