@@ -21,15 +21,15 @@ margin_case = margin_base * 1
 # Create the outline of the case.
 case_x = (floor(r19i(1)) - unit_count * margin_base) / 3
 case_y = r5s_y + 2 * margin_case
-case_z = rxxu(1) - 2 * tol_xy
+case_z = rxxu(1) - 2 * tol_z
 solid = cube([case_x, case_y, case_z])
 
 # Create the pocket for the Nanopi R5S.
 pocket_x = r5s_x + 2 * tol_xy
-pocket_y = r5s_y + 2 * tol_z
+pocket_y = r5s_y + 2 * tol_xy
 pocket = combine(
     cube([pocket_x, pocket_y, case_z]),
-    scale([1, 1, case_z/r5s_z]),
+    scale([1, 1, case_z / r5s_z]),
     translate([(case_x - pocket_x) / 2, (case_y - pocket_y) / 2, margin_case]),
 )
 solid -= pocket
@@ -54,6 +54,12 @@ front = combine(
 )
 solid -= front
 
+# Align case to ensure symmetric screw holes.
+solid = combine(
+    solid,
+    translate([0, 0, (rxxu(1) - case_z) / 2]),
+)
+
 # Create the screw holes.
 solid -= corners(
     case_x,
@@ -62,7 +68,6 @@ solid -= corners(
 
 solid = combine(
     solid,
-    translate([0, 0, (rxxu(1) - case_z) / 2]),
     color("#666"),
 )
 
