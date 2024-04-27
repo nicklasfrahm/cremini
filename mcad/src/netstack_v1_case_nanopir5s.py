@@ -105,7 +105,7 @@ latch += combine(
 )
 latch = combine(
     latch,
-    translate([(case_x - pocket_x) / 2 - latch_x + tol_xy, -tol_xy, margin_base * 2]),
+    translate([(case_x - pocket_x) / 2 - latch_x, -tol_xy, margin_base * 2]),
 )
 solid += latch
 
