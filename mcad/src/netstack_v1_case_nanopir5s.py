@@ -81,6 +81,34 @@ for i in range(vent_count):
         translate([(case_x - pocket_x) / 2 + margin_base * i + vent_x * i, - tol_xy, case_z - vent_z - margin_base])
     )
 
+# Create latch.
+latch_x = margin_base * 3 + tol_xy
+latch_y = case_y - 2 * margin_base - tol_xy
+latch_z = pocket_z - 2 * margin_base
+latch_cutout = combine(
+    cube([latch_x, latch_y, pocket_z]),
+    translate([(case_x - pocket_x) / 2 - latch_x + tol_xy, -tol_xy, margin_base]),
+)
+solid -= latch_cutout
+
+latch = combine(
+    cube([latch_x, 3 * margin_base, latch_z]),
+    translate([0, latch_y - 3 * margin_base, 0]),
+)
+latch += combine(
+    cube([margin_base, latch_y + tol_xy, latch_z]),
+    translate([latch_x - margin_base, -tol_xy, 0]),
+)
+latch += combine(
+    cube([margin_base * 3, margin_base * 4, latch_z]),
+    translate([latch_x - margin_base * 2, -(tol_xy + margin_base * 3), 0]),
+)
+latch = combine(
+    latch,
+    translate([(case_x - pocket_x) / 2 - latch_x + tol_xy, -tol_xy, margin_base * 2]),
+)
+solid += latch
+
 # Align case to ensure symmetric screw holes.
 solid = combine(
     solid,
