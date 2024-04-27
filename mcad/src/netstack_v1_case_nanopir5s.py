@@ -11,7 +11,7 @@ from lib.features import corners
 from netstack_v1_nanopir5s import r5s_x, r5s_y, r5s_z
 
 tol_z = 0.15
-tol_xy = 0.4
+tol_xy = 0.35
 unit_count = 4
 margin_screw = 10
 margin_base = 3
@@ -101,7 +101,7 @@ latch += combine(
 )
 latch += combine(
     cube([margin_base * 3, margin_base * 4, latch_z]),
-    translate([latch_x - margin_base * 2, -(tol_xy + margin_base * 3), 0]),
+    translate([latch_x - margin_base * 2, -(margin_base * 3 - tol_xy), 0]),
 )
 latch = combine(
     latch,
