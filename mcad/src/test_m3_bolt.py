@@ -12,6 +12,7 @@ pitch = 8
 increment = 0.05
 cols = 10
 rows = 2
+thread_z = 5
 
 tol_z = 0.1
 
@@ -25,7 +26,7 @@ bolt_thread_clearance_r = 3.6 / 2
 
 solid_x = pitch * (cols + 1)
 solid_y = pitch * (rows + 1)
-solid_z = bolt_head_z + bolt_thread_z
+solid_z = bolt_head_z + thread_z
 solid_r = 2
 
 def bolt(thread_r = bolt_thread_major_r):
@@ -68,7 +69,7 @@ for i in range(cols):
 
         solid -= combine(
             bolt(thread_r=thread_r),
-            translate([(1 + i) * pitch, (1 + j) * pitch, 0]),
+            translate([(1 + i) * pitch, (1 + j) * pitch, thread_z-bolt_thread_z]),
         )
 
 solid = combine(
