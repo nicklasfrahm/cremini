@@ -1,5 +1,9 @@
 # Network stack 📡
 
+# Version 2
+
+This case is optimized for [this micro appliance](https://www.amazon.de/-/en/dp/B0BKZMT4M3).
+
 # Version 1
 
 This new iteration focuses on simplicity in terms of components and assembly. The goal is to provide a basic network stack that can be easily assembled and maintained. The following components are planned:
