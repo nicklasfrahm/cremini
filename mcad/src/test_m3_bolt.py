@@ -8,6 +8,10 @@ from euclid3 import Point2
 from lib.utils import build, combine
 from lib.features import arc2d
 
+# Recommended parameters after testing:
+# Self-tapping fitting: 2.9(xy) - 3.0(z) mm diameter
+# Clearance fitting: 3.1(xy) - 3.2(z) mm diameter
+
 pitch = 8
 increment = 0.05
 cols = 10
