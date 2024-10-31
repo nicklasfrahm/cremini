@@ -10,7 +10,9 @@ from lib.features import arc2d
 
 # Recommended parameters after testing:
 # Self-tapping fitting: 2.9(xy) - 3.0(z) mm diameter
+self_tapping_r = 2.9 / 2
 # Clearance fitting: 3.1(xy) - 3.2(z) mm diameter
+clearance_r = 3.1 / 2
 
 pitch = 8
 increment = 0.05
@@ -33,12 +35,12 @@ solid_y = pitch * (rows + 1)
 solid_z = bolt_head_z + thread_z
 solid_r = 2
 
-def bolt(thread_r = bolt_thread_major_r):
+def bolt(thread_r = bolt_thread_major_r, head_r = bolt_head_r) -> OpenSCADObject:
     """
     Create a bolt.
     """
     head = combine(
-        cylinder(r=bold_head_clearance_r, h=bolt_head_z+tol_z),
+        cylinder(r=head_r, h=bolt_head_z+tol_z),
         up(bolt_thread_z),
     )
 
@@ -72,7 +74,7 @@ for i in range(cols):
             thread_r = bolt_thread_clearance_r + increment * i
 
         solid -= combine(
-            bolt(thread_r=thread_r),
+            bolt(thread_r=thread_r, head_r=bold_head_clearance_r),
             translate([(1 + i) * pitch, (1 + j) * pitch, thread_z-bolt_thread_z]),
         )
 
@@ -87,6 +89,17 @@ def obj() -> OpenSCADObject:
     """
     return solid
 
+def m3_bolt_clearance_hole() -> OpenSCADObject:
+    """
+    Create an M3 bolt hole.
+    """
+    return bolt(thread_r=clearance_r, head_r=bold_head_clearance_r)
+
+def m3_bolt_tapping_hole() -> OpenSCADObject:
+    """
+    Create a self-tapping M3 bolt hole.
+    """
+    return bolt(thread_r=self_tapping_r, head_r=bold_head_clearance_r)
 
 # Boilerplate code to export the file as `.scad` file if invoked as a script.
 if __name__ == "__main__":
