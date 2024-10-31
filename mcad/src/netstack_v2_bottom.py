@@ -1,14 +1,14 @@
 """
 A model of the Nanopi R5S with its enclosure.
 """
-from solid import OpenSCADObject, polygon, translate
+from solid import OpenSCADObject, polygon, translate, rotate
 from solid.objects import color
 from solid.utils import linear_extrude
 from euclid3 import Point2
 from lib.utils import build, combine
 from lib.features import arc2d
 
-from m3_bolt import m3_bolt_clearance_hole
+from m3_bolt import m3_bolt_clearance_hole, bolt_thread_z, bolt_head_z
 from netstack_v2_supply import supply_case_x, supply_case_y
 
 # Configurable design parameters.
@@ -51,39 +51,45 @@ solid = combine(
     color("#ff9800", 0.5),
 )
 
+bolt = combine(
+    m3_bolt_clearance_hole(),
+    rotate([0, 180, 0]),
+    translate([0, 0, bolt_thread_z + bolt_head_z]),
+)
+
 # Create holes for mounting the network appliance.
 solid -= combine(
-    m3_bolt_clearance_hole(),
+    bolt,
     translate([padding, padding + hole_xy / 2, 0]),
 )
 solid -= combine(
-    m3_bolt_clearance_hole(),
+    bolt,
     translate([padding + hole_xy / 2, padding + hole_xy, 0]),
 )
 solid -= combine(
-    m3_bolt_clearance_hole(),
+    bolt,
     translate([padding + hole_xy, padding + hole_xy / 2, 0]),
 )
 solid -= combine(
-    m3_bolt_clearance_hole(),
+    bolt,
     translate([padding + hole_xy / 2, padding, 0]),
 )
 
 # Create holes for mounting the power supply.
 solid -= combine(
-    m3_bolt_clearance_hole(),
+    bolt,
     translate([device_plate_x + wall / 2, device_plate_y + margin_y - wall / 2, 0]),
 )
 solid -= combine(
-    m3_bolt_clearance_hole(),
+    bolt,
     translate([device_plate_x + supply_case_x - wall / 2, device_plate_y + margin_y - wall / 2, 0]),
 )
 solid -= combine(
-    m3_bolt_clearance_hole(),
+    bolt,
     translate([device_plate_x + supply_case_x - wall / 2, - margin_y + wall / 2, 0]),
 )
 solid -= combine(
-    m3_bolt_clearance_hole(),
+    bolt,
     translate([device_plate_x + wall / 2, - margin_y + wall / 2, 0]),
 )
 
