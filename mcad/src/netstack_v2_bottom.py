@@ -10,11 +10,7 @@ from lib.features import arc2d
 
 from m3_bolt import m3_bolt_clearance_hole, bolt_thread_z, bolt_head_z
 from netstack_v2_supply import supply_case_x, supply_case_y, supply_r
-from netstack_v2_device import hole_xy, hole_margin_x, hole_margin_y, wall, tolerance_xy, padding, device_r
-
-# Configurable design parameters.
-cable_slot = 15
-bottom_z = 4
+from netstack_v2_device import hole_xy, hole_margin_x, hole_margin_y, wall, padding, device_r, cable_slot, bottom_z
 
 # Dimensions of the mounting plate for the network appliance.
 device_plate_x = padding + hole_xy + hole_margin_x + cable_slot

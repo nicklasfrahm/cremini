@@ -13,7 +13,10 @@ from m3_bolt import m3_bolt_tapping_hole
 # Configurable design parameters.
 wall = 8
 tolerance_xy = 0.3
+tolerance_z = 0.15
 padding = 5
+cable_slot = 15
+bottom_z = 4
 
 # Dimension of the network appliance.
 device_x = 136
