@@ -8,7 +8,7 @@ from euclid3 import Point2
 from lib.utils import build, combine
 from lib.features import arc2d
 
-from netstack_v2_device import wall, tolerance_xy, tolerance_z
+from netstack_v2_device import wall, tolerance_xy, tolerance_z, bottom_z
 
 # Dimension of the power supply.
 supply_x = 50.5
@@ -19,7 +19,7 @@ supply_r = 1
 # Dimensions of the case for the power supply.
 supply_case_x = supply_x + 2 * wall + tolerance_xy
 supply_case_y = supply_y + 2 * wall + tolerance_xy
-supply_case_z = supply_z + wall + tolerance_z
+supply_case_z = 44 - bottom_z
 
 # Dimensions of cable slot.
 supply_slot_x = 28

@@ -7,7 +7,7 @@ from lib.utils import build, combine
 from lib.units import rxxu, rxxr, r19i
 
 from netstack_v2_device import obj as device
-from netstack_v2_device import hole_margin_x, wall, padding
+from netstack_v2_device import hole_margin_x, wall, padding, rail_clearance
 from netstack_v2_bottom import obj as bottom
 from netstack_v2_bottom import bottom_x, bottom_z
 from netstack_v2_supply import obj as supply
@@ -15,11 +15,12 @@ from netstack_v2_supply import supply_x, supply_case_x
 from netstack_v2_top import obj as top
 
 explosion = 0.1
-offset_x = wall
+offset_x = rail_clearance + rxxr(0.5)
+offset_y = -wall / 2
 
 solid = combine(
     device(),
-    translate([r19i(1) - bottom_x - hole_margin_x + padding - offset_x, -wall, bottom_z + explosion]),
+    translate([r19i(1) - bottom_x - hole_margin_x + padding - offset_x, offset_y, bottom_z + explosion]),
 )
 
 # Create a mock of the mounting rails.
@@ -43,17 +44,17 @@ solid += rails
 
 solid += combine(
     bottom(),
-    translate([r19i(1) - bottom_x - offset_x, -wall, 0]),
+    translate([r19i(1) - bottom_x - offset_x, offset_y, 0]),
 )
 
 solid += combine(
     supply(),
-    translate([r19i(1) - supply_x - wall - offset_x, 0, bottom_z + explosion]),
+    translate([r19i(1) - supply_x - wall - offset_x, wall + offset_y, bottom_z + explosion]),
 )
 
 solid += combine(
     top(),
-    translate([r19i(1) - supply_case_x - offset_x, -wall, bottom_z]),
+    translate([r19i(1) - supply_case_x - offset_x, offset_y, bottom_z]),
 )
 
 def obj() -> OpenSCADObject:
