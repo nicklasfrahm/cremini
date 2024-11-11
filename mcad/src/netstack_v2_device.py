@@ -31,6 +31,9 @@ hole_xy = 70
 hole_margin_x = 33
 hole_margin_y = 28
 
+hole2_margin_x = 18
+hole2_margin_y = 13
+
 screw_margin = 70
 
 solid = combine(
@@ -46,6 +49,7 @@ solid = combine(
     color("#333", 0.5),
 )
 
+# Add diamond-arranged holes for mounting the network appliance.
 solid -= combine(
     m3_bolt_tapping_hole(),
     translate([hole_margin_x, hole_margin_y + screw_margin / 2, 0]),
@@ -61,6 +65,24 @@ solid -= combine(
 solid -= combine(
     m3_bolt_tapping_hole(),
     translate([hole_margin_x + screw_margin / 2, hole_margin_y + screw_margin, 0]),
+)
+
+# Add square-arranged holes for mounting the network appliance.
+solid -= combine(
+    m3_bolt_tapping_hole(),
+    translate([hole2_margin_x, hole2_margin_y, 0]),
+)
+solid -= combine(
+    m3_bolt_tapping_hole(),
+    translate([hole2_margin_x, device_y - hole2_margin_y, 0]),
+)
+solid -= combine(
+    m3_bolt_tapping_hole(),
+    translate([device_x - hole2_margin_x, hole2_margin_y, 0]),
+)
+solid -= combine(
+    m3_bolt_tapping_hole(),
+    translate([device_x - hole2_margin_x, device_y - hole2_margin_y, 0]),
 )
 
 def obj() -> OpenSCADObject:
